@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="display-4">{% trans 'Delete template' %}</h1>
+    <hr class="my-4">
+    <p class="lead">{% blocktrans with title=object.title %}Are you sure you want to delete the template "{{ title }}"? This action cannot be undone.{% endblocktrans %}</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">{% trans 'Confirm delete' %}</button>
+      <a href="{% url 'template-detail' object.id %}" class="btn btn-secondary">{% trans 'Cancel' %}</a>
+    </form>
+  </div>
+{% endblock content %}

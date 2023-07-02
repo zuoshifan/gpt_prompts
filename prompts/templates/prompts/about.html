@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="display-4">{% trans 'About GPT Prompts' %}</h1>
+    <p class="lead">{% trans 'GPT Prompts is a website that allows users to buy and sell prompts for GPT, a powerful natural language processing model that can generate text based on a given input.' %}</p>
+    <hr class="my-4">
+    <p>{% trans 'Users can create prompt templates or specific prompts in English or Chinese, and browse prompts by category, language, rating, price, etc. Users can make payments by PayPal, Stripe, UnionPay or WeChatPay. Users who have bought a prompt can rate or review it on a scale of 1 to 5 stars and leave a comment.' %}</p>
+    <p>{% trans 'GPT Prompts is built with Python, Django, Bootstrap, and other technologies. It supports multiple languages and currencies. It is secure, fast, and easy to use.' %}</p>
+    <p>{% trans 'GPT Prompts is created by an expert web developer who loves GPT and wants to share it with the world. If you have any questions, suggestions, or feedback, please contact us at gptprompts@gmail.com.' %}</p>
+  </div>
+{% endblock content %}

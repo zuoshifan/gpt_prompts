@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="display-4">{{ object.title }}</h1>
+    <hr class="my-4">
+    <p class="lead">{{ object.content }}</p>
+    <p><small class="text-muted">{{ object.category }} | {{ object.language }} | {{ object.price }} {{ request.COOKIES.currency }}</small></p>
+    {% if request.user == object.seller or request.user.is_superuser %}
+      <a href="{% url 'template-update' object.id %}" class="btn btn-warning">{% trans 'Update' %}</a>
+      <a href="{% url 'template-delete' object.id %}" class="btn btn-danger">{% trans 'Delete' %}</a>
+    {% endif %}
+    {% if request.user.is_authenticated and not request.user == object.seller %}
+      <a href="{% url 'prompt-create' %}?template={{ object.id }}" class="btn btn-success float-right">{% trans 'Create prompt' %}</a>
+    {% endif %}
+    <h2 class="mt-4">{% trans 'Prompts' %}</h2>
+    {% if object.prompts.all %}
+      <div class="row">
+        {% for prompt in object.prompts.all %}
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title">{{ prompt.title }}</h5>
+                <p class="card-text">{{ prompt.content }}</p>
+                <p class="card-text"><small class="text-muted">{{ prompt.language }} | {{ prompt.price }} {{ request.COOKIES.currency }}</small></p>
+                {% if request.user == prompt.seller or request.user.is_superuser %}
+                  <a href="{% url 'prompt-update' prompt.id %}" class="btn btn-warning">{% trans 'Update' %}</a>
+                  <a href="{% url 'prompt-delete' prompt.id %}" class="btn btn-danger">{% trans 'Delete' %}</a>
+                {% endif %}
+                <a href="{% url 'prompt-detail' prompt.id %}" class="btn btn-primary float-right">{% trans 'View details' %}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="lead">{% trans 'No prompts found.' %}</p>
+    {% endif %}
+  </div>
+{% endblock content %}

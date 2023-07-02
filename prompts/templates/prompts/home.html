@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="display-4">{% trans 'Welcome to GPT Prompts' %}</h1>
+    <p class="lead">{% trans 'The ultimate website for buying and selling prompts for GPT.' %}</p>
+    <hr class="my-4">
+    <p>{% trans 'Browse our categories of prompts or create your own.' %}</p>
+    <div class="row">
+      {% for category in categories %}
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">{{ category.name }}</h5>
+              <p class="card-text">{{ category.templates.count }} {% trans 'templates' %}</p>
+              <a href="{% url 'template-list' %}?category={{ category.slug }}" class="btn btn-primary">{% trans 'View templates' %}</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

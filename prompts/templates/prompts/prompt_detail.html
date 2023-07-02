@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="display-4">{{ object.title }}</h1>
+    <hr class="my-4">
+    <p class="lead">{{ object.content }}</p>
+    <p><small class="text-muted">{{ object.template }} | {{ object.language }} | {{ object.price }} {{ request.COOKIES.currency }}</small></p>
+    {% if request.user == object.seller or request.user.is_superuser %}
+      <a href="{% url 'prompt-update' object.id %}" class="btn btn-warning">{% trans 'Update' %}</a>
+      <a href="{% url 'prompt-delete' object.id %}" class="btn btn-danger">{% trans 'Delete' %}</a>
+    {% endif %}
+    {% if request.user.is_authenticated and not request.user == object.seller %}
+      {% if not Purchase.objects.filter(buyer=request.user, prompt=object).exists %}
+        <a href="{% url 'prompt-buy' object.id %}" class="btn btn-success float-right">{% trans 'Buy prompt' %}</a>
+      {% else %}
+        {% if not object.feedback_set.filter(rater=request.user).exists %}
+          <a href="{% url 'prompt-feedback-create' object.id %}" class="btn btn-info float-right">{% trans 'Rate and review' %}</a>
+        {% else %}
+          <a href="{% url 'prompt-feedback-update' object.id %}" class="btn btn-info float-right">{% trans 'Update rating and review' %}</a>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    <h2 class="mt-4">{% trans 'Feedbacks' %}</h2>
+    {% if object.feedback_set.all %}
+      {% for feedback in object.feedback_set.all %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ feedback.rater }}</h5>
+            <p class="card-text">{{ feedback.comment }}</p>
+            <p class="card-text"><small class="text-muted">{{ feedback.rating }} / 5 stars</small></p>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="lead">{% trans 'No feedbacks found.' %}</p>
+    {% endif %}
+  </div>
+{% endblock content %}

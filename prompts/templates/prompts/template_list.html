@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="display-4">{% trans 'Templates' %}</h1>
+    <hr class="my-4">
+    {% if request.user.is_authenticated %}
+      <a href="{% url 'template-create' %}" class="btn btn-success mb-3">{% trans 'Create template' %}</a>
+    {% endif %}
+    {% if object_list %}
+      <form method="get" class="form-inline mb-3">
+        {% csrf_token %}
+        {% bootstrap_form filter.form %}
+        <button type="submit" class="btn btn-primary ml-2">{% trans 'Filter' %}</button>
+      </form>
+      <div class="row">
+        {% for template in object_list %}
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title">{{ template.title }}</h5>
+                <p class="card-text">{{ template.content }}</p>
+                <p class="card-text"><small class="text-muted">{{ template.category }} | {{ template.language }} | {{ template.price }} {{ request.COOKIES.currency }}</small></p>
+                {% if request.user == template.seller or request.user.is_superuser %}
+                  <a href="{% url 'template-update' template.id %}" class="btn btn-warning">{% trans 'Update' %}</a>
+                  <a href="{% url 'template-delete' template.id %}" class="btn btn-danger">{% trans 'Delete' %}</a>
+                {% endif %}
+                <a href="{% url 'template-detail' template.id %}" class="btn btn-primary float-right">{% trans 'View details' %}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      {% bootstrap_pagination page_obj %}
+    {% else %}
+      <p class="lead">{% trans 'No templates found.' %}</p>
+    {% endif %}
+  </div>
+{% endblock content %}
