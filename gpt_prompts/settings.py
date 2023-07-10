@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     # 'coupons',
     # 'feedback',
     'bootstrap4',
-    'social_django',
+    # 'social_django',
     'rosetta',
     'paypal.standard.ipn',
     'djstripe',
@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -93,8 +94,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 # Context processor for social authentication
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
+                # 'social_django.context_processors.backends',
+                # 'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -149,10 +150,10 @@ AUTHENTICATION_BACKENDS = (
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 
-    # Authentication backends for social accounts
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.microsoft.MicrosoftOAuth2',
-    'social_core.backends.wechat.WeChatOAuth2',
+    # # Authentication backends for social accounts
+    # 'social_core.backends.google.GoogleOAuth2',
+    # 'social_core.backends.microsoft.MicrosoftOAuth2',
+    # 'social_core.backends.wechat.WeChatOAuth2',
 )
 
 # # Set the social authentication keys and secrets from environment variables
@@ -182,7 +183,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Set the login URL and redirect URL for social authentication
-LOGIN_URL = 'login'
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = 'home'
 
 # Internationalization
@@ -195,7 +196,8 @@ TIME_ZONE = 'UTC'
 # Set the available languages for the website
 LANGUAGES = (
     ('en', 'English'),
-    ('zh-Hans', 'Chinese'),
+    # ('zh-Hans', 'Chinese'),
+    ('zh-hans', 'Chinese'),
 )
 
 # Set the locale paths for the translation files
@@ -252,6 +254,10 @@ ACCOUNT_USERNAME_BLACKLIST = ["admin", "god", "root"]
 ACCOUNT_USERNAME_MIN_LENGTH = 2
 ACCOUNT_ADAPTER="allauth.account.adapter.DefaultAccountAdapter"
 
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = "django_sendmail_backend.backends.EmailBackend"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

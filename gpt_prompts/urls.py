@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
 
 # Define URL patterns
 urlpatterns = [
@@ -24,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # URL pattern for prompts app
-    path('', include('prompts.urls')),
+    # path('', include('prompts.urls')),
 
     # # URL pattern for accounts app
     # path('accounts/', include('accounts.urls')),
@@ -32,11 +33,22 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     # URL pattern for social authentication app
-    path('social-auth/', include('social_django.urls', namespace='social')),
+    # path('social-auth/', include('social_django.urls', namespace='social')),
 
     # URL pattern for rosetta app (for translation management)
-    # path('rosetta/', include('rosetta.urls')),
+    path('rosetta/', include('rosetta.urls')),
 ]
+
+urlpatterns += i18n_patterns(
+    # URL pattern for prompts app
+    path('', include('prompts.urls')),
+)
+
+urlpatterns += [path('i18n/', include('django.conf.urls.i18n')),]
+# urlpatterns += i18n_patterns(
+#   # url patterns for translated views
+#   path('i18n/', include('django.conf.urls.i18n')),
+# )
 
 # Add static and media files to URL patterns if in debug mode
 if settings.DEBUG:

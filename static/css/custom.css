@@ -1,0 +1,43 @@
+.form-inline {
+  position: relative;
+}
+
+.form-inline input {
+  padding-right: 30px;
+}
+
+.form-inline button {
+  position: absolute;
+  right: 0px;
+  top: 1px;
+  border: none;
+}
+
+.form-inline button svg {
+  width: 20px;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+text-decoration: none;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+.main {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+}

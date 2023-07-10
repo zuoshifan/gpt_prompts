@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+{% trans 'Search results for' %} {{ query }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{% trans 'Search results for' %} {{ query }}</h1>
+    {% if prompts %}
+    <ul>
+        {% for prompt in prompts %}
+        <li><a href="{{ prompt.get_absolute_url }}">{{ prompt.title }}</a></li>
+        <p>{{ prompt.content }}</p>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>{% trans 'No prompts matched your search criteria.' %}</p>
+    {% endif %}
+</div>
+{% endblock %}

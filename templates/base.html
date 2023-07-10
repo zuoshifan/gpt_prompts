@@ -6,54 +6,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{% block title %}GPT Prompts{% endblock title %}</title>
+  <title>{% block title %}{% trans 'Prompts for Bing AI' %}{% endblock title %}</title>
   <!-- Load Bootstrap CSS -->
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <!-- Load custom CSS -->
   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 </head>
 <body>
+  <div class="main">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'home' %}">GPT Prompts</a>
+      <a class="navbar-brand" href="{% url 'home' %}">PromptBing</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-            <a class="nav-link" href="{% url 'home' %}">{% trans 'Home' %}</a>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'prompt-list' or request.resolver_match.url_name == 'prompt-detail' %}active{% endif %}" href="{% url 'prompt-list' %}">{% trans 'Marketplace' %}</a>
           </li>
-          <li class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
-            <a class="nav-link" href="{% url 'about' %}">{% trans 'About' %}</a>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'prompt-create' %}active{% endif %}" href="{% url 'prompt-create' %}">{% trans 'Sell' %}</a>
           </li>
-          <li class="nav-item {% if request.resolver_match.url_name == 'template-list' or request.resolver_match.url_name == 'template-detail' or request.resolver_match.url_name == 'template-create' or request.resolver_match.url_name == 'template-update' or request.resolver_match.url_name == 'template-delete' %}active{% endif %}">
-            <a class="nav-link" href="{% url 'template-list' %}">{% trans 'Templates' %}</a>
-          </li>
-          <li class="nav-item {% if request.resolver_match.url_name == 'prompt-list' or request.resolver_match.url_name == 'prompt-detail' or request.resolver_match.url_name == 'prompt-create' or request.resolver_match.url_name == 'prompt-update' or request.resolver_match.url_name == 'prompt-delete' or request.resolver_match.url_name == 'prompt-buy' or request.resolver_match.url_name == 'prompt-feedback-create' or request.resolver_match.url_name == 'prompt-feedback-update' %}active{% endif %}">
-            <a class="nav-link" href="{% url 'prompt-list' %}">{% trans 'Prompts' %}</a>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">{% trans 'About' %}</a>
           </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
+
+        <!-- Search bar -->
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
+          <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search prompts" aria-label="Search" style="width: 600px; max-width: 100%;">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg></button>
+        </form>
+
+        <!-- Luanguage -->
+        <div class="ms-auto">
+            <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language" onchange="this.form.submit()">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                        {{ language.name_local }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+
+        <ul class="navbar-nav ms-auto">
           {% if user.is_authenticated %}
             {% if user.is_superuser %}
-              <li class="nav-item {% if request.resolver_match.app_name == 'admin' %}active{% endif %}">
-                <a class="nav-link" href="{% url 'admin:index' %}">{% trans 'Admin' %}</a>
+              <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.app_name == 'admin' %}active{% endif %}" href="{% url 'admin:index' %}">{% trans 'Admin' %}</a>
               </li>
             {% endif %}
-            <li class="nav-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
-              <a class="nav-link" href="{% url 'profile' %}">{% trans 'Profile' %}</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="/accounts/logout/">{% trans 'Logout' %}</a>
             </li>
           {% else %}
-            <li class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
-              <a class="nav-link" href="/accounts/login/">{% trans 'Login' %}</a>
+            <li class="nav-item">
+              <a class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="/accounts/login/">{% trans 'Login' %}</a>
             </li>
-            <li class="nav-item {% if request.resolver_match.url_name == 'signup' %}active{% endif %}">
-              <a class="nav-link" href="/accounts/signup/">{% trans 'Sign up' %}</a>
+            <li class="nav-item">
+              <a class="nav-link {% if request.resolver_match.url_name == 'signup' %}active{% endif %}" href="/accounts/signup/">{% trans 'Sign up' %}</a>
             </li>
           {% endif %}
         </ul>
@@ -64,30 +84,32 @@
   <!-- Main content -->
   {% block content %}
   {% endblock content %}
+  </div>
+
   <!-- Footer -->
-  <footer class="footer bg-dark text-white">
+  <footer class="footer bg-dark text-white pt-5">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <h5>{% trans 'GPT Prompts' %}</h5>
-          <p>{% trans 'The ultimate website for buying and selling prompts for GPT.' %}</p>
+          <h5>{% trans 'PromptBing' %}</h5>
+          <p>{% trans 'The Prompt Marketplace for Bing AI.' %}</p>
         </div>
         <div class="col-md-4">
           <h5>{% trans 'Links' %}</h5>
           <ul class="list-unstyled">
             <li><a href="{% url 'home' %}" class="text-white">{% trans 'Home' %}</a></li>
+            <li><a href="{% url 'prompt-list' %}" class="text-white">{% trans 'Marketplace' %}</a></li>
+            <li><a href="{% url 'prompt-create' %}" class="text-white">{% trans 'Sell' %}</a></li>
             <li><a href="{% url 'about' %}" class="text-white">{% trans 'About' %}</a></li>
-            <li><a href="{% url 'template-list' %}" class="text-white">{% trans 'Templates' %}</a></li>
-            <li><a href="{% url 'prompt-list' %}" class="text-white">{% trans 'Prompts' %}</a></li>
           </ul>
         </div>
         <div class="col-md-4">
           <h5>{% trans 'Contact us' %}</h5>
-          <p><i class="fas fa-envelope"></i> gptprompts@gmail.com</p>
+          <p><i class="fas fa-envelope"></i> promptbing@gmail.com</p>
         </div>
       </div>
       <hr class="my-4">
-      <p class="text-center">© 2023 GPT Prompts. {% trans 'All rights reserved.' %}</p>
+      <p class="text-center">© 2023 PromptBing. {% trans 'All rights reserved.' %}</p>
     </div>
   </footer>
 

@@ -1,0 +1,478 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-09 10:58+0000\n"
+"PO-Revision-Date: 2023-07-09 11:01+0000\n"
+"Last-Translator:   <zikele@yeah.net>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Translated-Using: django-rosetta 0.9.9\n"
+
+#: prompts/forms.py:7
+msgid "Leave this blank if you are a human"
+msgstr ""
+
+#: prompts/forms.py:12
+msgid ""
+"If you enter anything in this field, your submit will be treated as spam."
+msgstr ""
+
+#: prompts/models.py:16
+msgid "name"
+msgstr ""
+
+#: prompts/models.py:24
+msgid "category"
+msgstr "类别"
+
+#: prompts/models.py:25
+msgid "categories"
+msgstr "类别"
+
+#: prompts/models.py:45
+msgid "type"
+msgstr "类型"
+
+#: prompts/models.py:50
+msgid "Prompt type"
+msgstr "提示词类型"
+
+#: prompts/models.py:51 prompts/models.py:90
+msgid "Prompt types"
+msgstr "提示词类型"
+
+#: prompts/models.py:67
+msgid "Title"
+msgstr "标题"
+
+#: prompts/models.py:67
+msgid "The title of the prompt."
+msgstr "提示词标题"
+
+#: prompts/models.py:70
+msgid "Category"
+msgstr ""
+
+#: prompts/models.py:70
+msgid "Categories of the prompt."
+msgstr ""
+
+#: prompts/models.py:73
+msgid "Cover image"
+msgstr ""
+
+#: prompts/models.py:73
+msgid "A cover image for the prompt."
+msgstr ""
+
+#: prompts/models.py:76
+msgid "Description"
+msgstr ""
+
+#: prompts/models.py:76
+msgid ""
+"Describe what your prompt does to a potential buyer. A more detailed "
+"description will increase your sales."
+msgstr ""
+
+#: prompts/models.py:80
+msgid "More Creative"
+msgstr ""
+
+#: prompts/models.py:81
+msgid "More Balanced"
+msgstr ""
+
+#: prompts/models.py:82
+msgid "More Precise"
+msgstr ""
+
+#: prompts/models.py:84
+msgid "Conversation style"
+msgstr ""
+
+#: prompts/models.py:84
+msgid "Choose a conversation style for your prompt."
+msgstr ""
+
+#: prompts/models.py:87
+msgid "Content"
+msgstr ""
+
+#: prompts/models.py:87
+msgid "Write the content of your prompt."
+msgstr ""
+
+#: prompts/models.py:90
+msgid "Choose one or more types for your prompt."
+msgstr ""
+
+#: prompts/models.py:93
+msgid "Price (US Dollar)"
+msgstr ""
+
+#: prompts/models.py:93
+msgid "Set the price of your prompt in US dollars."
+msgstr ""
+
+#: prompts/models.py:96
+msgid "Price (Chinese Yuan)"
+msgstr ""
+
+#: prompts/models.py:96
+msgid "Set the price of your prompt in Chinese yuan."
+msgstr ""
+
+#: prompts/models.py:99
+msgid "Seller"
+msgstr ""
+
+#: prompts/models.py:99
+msgid "The user who created and sells the prompt."
+msgstr ""
+
+#: prompts/models.py:102
+msgid "Created at"
+msgstr ""
+
+#: prompts/models.py:102
+msgid "The date and time when the prompt was uploaded."
+msgstr ""
+
+#: prompts/models.py:105
+msgid "Ppdated at"
+msgstr ""
+
+#: prompts/models.py:105
+msgid "The date and time when the prompt was last updated."
+msgstr ""
+
+#: prompts/models.py:108
+msgid "Feedback"
+msgstr ""
+
+#: prompts/models.py:108
+msgid "Feedbacks to the seller of the prompt."
+msgstr ""
+
+#: prompts/models.py:111
+msgid "Approved"
+msgstr ""
+
+#: prompts/models.py:111
+msgid "Whether the prompt is approved by an admin or not."
+msgstr ""
+
+#: prompts/models.py:116
+msgid "Prompt"
+msgstr ""
+
+#: prompts/models.py:117 prompts/templates/prompts/prompt_list.html:7
+#: prompts/templates/prompts/template_detail.html:18
+msgid "Prompts"
+msgstr ""
+
+#: prompts/models.py:249
+msgid "date"
+msgstr ""
+
+#: prompts/models.py:258
+msgid "payment method"
+msgstr ""
+
+#: prompts/models.py:264
+msgid "purchase"
+msgstr ""
+
+#: prompts/models.py:265
+msgid "purchases"
+msgstr ""
+
+#: prompts/templates/prompts/about.html:7
+msgid "About PromptBing"
+msgstr ""
+
+#: prompts/templates/prompts/about.html:8
+msgid ""
+"PromptBing is a website that allows users to buy and sell prompts for Bing "
+"AI, a powerful natural language processing model that can generate text and "
+"image based on a given input."
+msgstr ""
+
+#: prompts/templates/prompts/about.html:10
+msgid ""
+"Users can create prompt templates or specific prompts in English or Chinese,"
+" and browse prompts by category, language, rating, price, etc. Users can "
+"make payments by PayPal, Stripe, UnionPay or WeChatPay. Users who have "
+"bought a prompt can rate or review it on a scale of 1 to 5 stars and leave a"
+" comment."
+msgstr ""
+
+#: prompts/templates/prompts/about.html:11
+msgid ""
+"PromptBing supports multiple languages and currencies. It is secure, fast, "
+"and easy to use."
+msgstr ""
+
+#: prompts/templates/prompts/about.html:12
+msgid ""
+"PromptBing is created by AI enthusiasts who loves AI prompts and wants to "
+"share it with the world. If you have any questions, suggestions, or "
+"feedback, please contact us at promptbing@gmail.com."
+msgstr ""
+
+#: prompts/templates/prompts/home.html:8
+msgid "Welcome to GPT Prompts"
+msgstr ""
+
+#: prompts/templates/prompts/home.html:9
+msgid "The ultimate website for buying and selling prompts for GPT."
+msgstr ""
+
+#: prompts/templates/prompts/home.html:11
+msgid "Browse our categories of prompts or create your own."
+msgstr ""
+
+#: prompts/templates/prompts/home.html:18
+msgid "prompts"
+msgstr ""
+
+#: prompts/templates/prompts/home.html:19
+msgid "View templates"
+msgstr ""
+
+#: prompts/templates/prompts/home.html:31
+msgid "Welcome to PromptBing"
+msgstr ""
+
+#: prompts/templates/prompts/home.html:32 templates/base.html:86
+msgid "The Prompt Marketplace for Bing AI."
+msgstr ""
+
+#: prompts/templates/prompts/home.html:33
+msgid "Find top prompts, produce better results, sell your own prompts."
+msgstr ""
+
+#: prompts/templates/prompts/home.html:35
+msgid "Find a prompt"
+msgstr ""
+
+#: prompts/templates/prompts/home.html:38
+msgid "Sell a prompt"
+msgstr ""
+
+#: prompts/templates/prompts/home.html:44 templates/base.html:9
+msgid "Prompts for Bing AI"
+msgstr ""
+
+#: prompts/templates/prompts/home.html:45
+msgid "Get the most and best from Bing AI."
+msgstr ""
+
+#: prompts/templates/prompts/prompt_confirm_delete.html:7
+msgid "Delete prompt"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_confirm_delete.html:9
+#, python-format
+msgid ""
+"Are you sure you want to delete the prompt \"%(title)s\"? This action cannot"
+" be undone."
+msgstr ""
+
+#: prompts/templates/prompts/prompt_confirm_delete.html:12
+#: prompts/templates/prompts/template_confirm_delete.html:12
+msgid "Confirm delete"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_confirm_delete.html:13
+#: prompts/templates/prompts/template_confirm_delete.html:13
+msgid "Cancel"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_create.html:6
+#: prompts/templates/prompts/prompt_create_old1.html:6
+#: prompts/templates/prompts/prompt_create_old1.html:9
+#: prompts/templates/prompts/prompt_create_old2.html:6
+msgid "Create a prompt"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_create.html:12
+#: prompts/templates/prompts/prompt_create_old2.html:12
+msgid "Create a prompt for selling and begin to make money"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_create.html:106
+#: prompts/templates/prompts/prompt_create_old.html:23
+#: prompts/templates/prompts/prompt_create_old1.html:31
+#: prompts/templates/prompts/prompt_create_old2.html:136
+#: prompts/templates/prompts/prompt_feedback_form.html:16
+#: prompts/templates/prompts/prompt_form.html:16
+#: prompts/templates/prompts/template_form.html:16
+msgid "Submit"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_create_old.html:7
+#: prompts/templates/prompts/prompt_form.html:8
+msgid "Update prompt"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_detail.html:12
+#: prompts/templates/prompts/prompt_list.html:27
+#: prompts/templates/prompts/template_detail.html:12
+#: prompts/templates/prompts/template_detail.html:29
+#: prompts/templates/prompts/template_list.html:27
+msgid "Update"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_detail.html:13
+#: prompts/templates/prompts/prompt_list.html:28
+#: prompts/templates/prompts/template_detail.html:13
+#: prompts/templates/prompts/template_detail.html:30
+#: prompts/templates/prompts/template_list.html:28
+msgid "Delete"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_detail.html:17
+msgid "Buy prompt"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_detail.html:20
+#: prompts/templates/prompts/prompt_feedback_form.html:10
+msgid "Rate and review"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_detail.html:22
+#: prompts/templates/prompts/prompt_feedback_form.html:8
+msgid "Update rating and review"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_detail.html:26
+msgid "Feedbacks"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_detail.html:38
+msgid "No feedbacks found."
+msgstr ""
+
+#: prompts/templates/prompts/prompt_form.html:10
+#: prompts/templates/prompts/prompt_list.html:10
+#: prompts/templates/prompts/template_detail.html:16
+msgid "Create prompt"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_list.html:16
+#: prompts/templates/prompts/template_list.html:16
+msgid "Filter"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_list.html:30
+#: prompts/templates/prompts/template_detail.html:32
+#: prompts/templates/prompts/template_list.html:30
+msgid "View details"
+msgstr ""
+
+#: prompts/templates/prompts/prompt_list.html:38
+#: prompts/templates/prompts/template_detail.html:39
+msgid "No prompts found."
+msgstr ""
+
+#: prompts/templates/prompts/search_results.html:5
+#: prompts/templates/prompts/search_results.html:10
+msgid "Search results for"
+msgstr ""
+
+#: prompts/templates/prompts/search_results.html:19
+msgid "No prompts matched your search criteria."
+msgstr ""
+
+#: prompts/templates/prompts/template_confirm_delete.html:7
+msgid "Delete template"
+msgstr ""
+
+#: prompts/templates/prompts/template_confirm_delete.html:9
+#, python-format
+msgid ""
+"Are you sure you want to delete the template \"%(title)s\"? This action "
+"cannot be undone."
+msgstr ""
+
+#: prompts/templates/prompts/template_form.html:8
+msgid "Update template"
+msgstr ""
+
+#: prompts/templates/prompts/template_form.html:10
+#: prompts/templates/prompts/template_list.html:10
+msgid "Create template"
+msgstr ""
+
+#: prompts/templates/prompts/template_list.html:7
+msgid "Templates"
+msgstr ""
+
+#: prompts/templates/prompts/template_list.html:38
+msgid "No templates found."
+msgstr ""
+
+#: templates/base.html:27 templates/base.html:92
+msgid "Marketplace"
+msgstr ""
+
+#: templates/base.html:30 templates/base.html:93
+msgid "Sell"
+msgstr ""
+
+#: templates/base.html:33 templates/base.html:94
+msgid "About"
+msgstr ""
+
+#: templates/base.html:46
+msgid "Language"
+msgstr ""
+
+#: templates/base.html:56
+msgid "Admin"
+msgstr ""
+
+#: templates/base.html:60
+msgid "Logout"
+msgstr ""
+
+#: templates/base.html:64
+msgid "Login"
+msgstr ""
+
+#: templates/base.html:67
+msgid "Sign up"
+msgstr ""
+
+#: templates/base.html:85
+msgid "PromptBing"
+msgstr ""
+
+#: templates/base.html:89
+msgid "Links"
+msgstr ""
+
+#: templates/base.html:91
+msgid "Home"
+msgstr ""
+
+#: templates/base.html:98
+msgid "Contact us"
+msgstr ""
+
+#: templates/base.html:103
+msgid "All rights reserved."
+msgstr ""
