@@ -32,6 +32,12 @@ urlpatterns = [
     # allauth
     path('accounts/', include('allauth.urls')),
 
+    # URL pattern for markdownx app
+    # path('markdownx/', include('markdownx.urls')),
+
+    # URL pattern for mdeditor app
+    path('mdeditor/', include('mdeditor.urls')),
+
     # URL pattern for social authentication app
     # path('social-auth/', include('social_django.urls', namespace='social')),
 

@@ -1,35 +1,95 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load bootstrap4 %}
 {% load i18n %}
+
+{% block css %}
+{{ block.super }}
+
+<link href="/static/mdeditor/css/editormd.preview.css" type="text/css" media="all" rel="stylesheet">
+<script src="/static/mdeditor/js/jquery.min.js"></script>
+<script src="/static/mdeditor/js/editormd.min.js"></script>
+<script src="/static/mdeditor/js/lib/marked.min.js"></script>
+<script src="/static/mdeditor/js/lib/prettify.min.js"></script>
+{% endblock css %}
 
 {% block content %}
 <div class="container my-5">
     <div class="row">
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <img class="card-img-top" src="/media/{{ prompt.cover }}" alt="{{ prompt.title }}">
+        <div class="col-md-6">
+            <div id="left">
+                <div class="card mb-4">
+                    <img class="card-img-top" src="/media/{{ prompt.cover }}" alt="{{ prompt.title }}">
+                </div>
+                <h2>{{ prompt.title }}</h2>
+                <p>{{ prompt.seller }} {{ prompt.updated_at }}</p>
+                <p><strong>Conversation style: </strong>{{ prompt.get_style_display }}</p>
+                <p><strong>Prompt types: </strong></p>
+                <ul>
+                    {% for type in prompt.types.all %}
+                    <li>{{ type }}</li>
+                    {% endfor %}
+                </ul>
+                <hr class="my-4">
+                <p class="lead">{{ prompt.description }}</p>
+                <p><strong>Price: </strong><strong>${{ prompt.price_dollar }}</strong> or <strong>￥{{ prompt.price_yuan}}</strong></p>
+                <a href="#" title="Get prompt" class="btn btn-primary btn-lg keychainify-checked">
+                    {% trans 'Get prompt' %}
+                </a>
+                <hr class="my-4">
+                <p class="lead">{{ prompt.content }}</p>
             </div>
         </div>
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-7">
-            <h2 class="display-4">{{ prompt.title }}</h2>
-            <hr class="my-4">
-            <p>{{ prompt.seller }} {{ prompt.updated_at }}</p>
-            <p><strong>Conversation style: </strong>{{ prompt.get_style_display }}</p>
-            <p><strong>Prompt types: </strong></p>
-            <ul>
-                {% for type in prompt.types.all %}
-                <li>{{ type }}</li>
-                {% endfor %}
-            </ul>
-            <p><strong>Price: </strong><strong>${{ prompt.price_dollar }}</strong> or <strong>￥{{ prompt.price_yuan}}</strong></p>
-            <p class="lead">{{ prompt.description }}</p>
+        <div class="col-md-6">
+            <p><strong>Example output:</strong></p>
+            <div id="right" style="overflow-y: scroll;">
+
+                <div id="test-markdown-view">
+                    <!-- Server-side output Markdown text -->
+                    <textarea style="display:none;">{{ prompt.output|safe }}</textarea>
+                </div>
+
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        {{ prompt.content }}
+    <div class="row my-5">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <a href="{% url 'prompt-list' %}" title="Sell a prompt" class="btn btn-outline-primary btn-lg keychainify-checked">
+                    {% trans 'Browse Marketplace' %}
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
     </div>
 </div>
 {% endblock content %}
+
+
+{% block js %}
+{{ block.super }}
+
+<script type="text/javascript">
+ $(function() {
+     var testView = editormd.markdownToHTML("test-markdown-view", {
+         // markdown : "[TOC]\n### Hello world!\n## Heading 2", // Also, you can dynamic set Markdown text
+         // htmlDecode : true,  // Enable / disable HTML tag encode.
+         // htmlDecode : "style,script,iframe",  // Note: If enabled, you should filter some dangerous HTML tags for website security.
+     });
+ });
+</script>
+
+<script type="text/javascript">
+ setTimeout(() => {
+     var left = document.getElementById("left"); // get the left div element
+     var right = document.getElementById("right"); // get the right div element
+     var leftHeight = left.offsetHeight; // get the height of the left div, including padding and border
+     right.style.height = leftHeight + "px"; // set the height of the right div to match the left div
+ }, 100); // 100 milliseconds = 0.1 seconds
+</script>
+
+{% endblock js %}

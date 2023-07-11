@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     'django_filters',
     # 'coupons',
     # 'feedback',
+    # 'markdownx',
+    'mdeditor',
     'bootstrap4',
+    'fontawesome_5',
     # 'social_django',
     'rosetta',
     'paypal.standard.ipn',
@@ -229,7 +232,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Login
-LOGIN_URL = '/login/'
+# LOGIN_URL = '/login/'
 
 # allauth
 # LOGIN_URL = '/login/'
@@ -264,6 +267,37 @@ else:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# mdeditor setting
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+MDEDITOR_CONFIGS = {
+    'default':{
+        'width': '100% ',  # Custom edit box width
+        'height': 500,  # Custom edit box height
+        'toolbar': ["undo", "redo", "|",
+                    "bold", "italic",
+                    "h2", "h3", "h4", "h5", "|",
+                    "list-ul", "list-ol", "hr", "|",
+                    "link", "image", "code", "code-block", "table", "datetime",
+                    "emoji", "html-entities", "|",
+                    "help"
+                    ],  # custom edit box toolbar
+        'upload_image_formats': ["jpg", "jpeg", "gif", "png", "bmp", "webp"],  # image upload format type
+        'image_folder': 'editor',  # image save the folder name
+        'theme': 'default',  # edit box theme, dark / default
+        'preview_theme': 'default',  # Preview area theme, dark / default
+        'editor_theme': 'default',  # edit area theme, pastel-on-dark / default
+        'toolbar_autofixed': True,  # Whether the toolbar capitals
+        'search_replace': True,  # Whether to open the search for replacement
+        'emoji': True,  # whether to open the expression function
+        'tex': True,  # whether to open the tex chart function
+        'flow_chart': True,  # whether to open the flow chart function
+        'sequence': True, # Whether to open the sequence diagram function
+        'watch': True,  # Live preview
+        'lineWrapping': False,  # lineWrapping
+        'lineNumbers': False,  # lineNumbers
+        'language': 'en'  # zh / en / es
+    }
+}
 
 # # Set the PayPal settings from environment variables
 # PAYPAL_RECEIVER_EMAIL = os.environ.get('PAYPAL_RECEIVER_EMAIL')

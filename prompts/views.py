@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
+# import mistune
 from .models import Category, Prompt
 from .forms import PromptForm
 
@@ -41,6 +42,7 @@ def prompt_create(request):
             prompt.seller = request.user
             # Save the prompt instance to the database
             prompt.save()
+            form.save_m2m() # save the many-to-many data for the form
             # Add a success message to the request
             messages.success(request, 'Your prompt has been created successfully.')
             # Redirect to the prompt detail view
@@ -78,6 +80,10 @@ class PromptDetailView(DetailView):
     model = Prompt
     template_name = 'prompts/prompt_detail.html'
 
+    # def get_context_data(self, **kwargs):
+    #     context = super(PromptDetailView, self).get_context_data(**kwargs)
+    #     context['output_html'] = mistune.markdown(context['object'].output, escape=False) if context['object'] else ''
+    #     return context
 
 def search(request):
   query = request.GET.get('q', '')

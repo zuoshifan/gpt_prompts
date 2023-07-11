@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
+# from markdownx.models import MarkdownxField
+from mdeditor.fields import MDTextField
 
 # Create your models here.
 # Define a model for prompt categories
@@ -89,6 +91,10 @@ class Prompt(models.Model):
     # Types field (required, many-to-many relation to PromptType model)
     types = models.ManyToManyField(PromptType, verbose_name=_('Prompt types'), help_text=_('Choose one or more types for your prompt.'))
 
+    # Output field (required, text field)
+    # output = MarkdownxField(verbose_name=_('Example output'), help_text=_('Example output of your prompt.'))
+    output = MDTextField(verbose_name=_('Example output'), help_text=_('Example output of your prompt.'))
+
     # Price dollar field (required, decimal field with two decimal places, minimum value of 0.01)
     price_dollar = models.DecimalField(max_digits=6, decimal_places=2, validators=[MinValueValidator(0.01)], verbose_name=_('Price (US Dollar)'), help_text=_('Set the price of your prompt in US dollars.'))
 
@@ -105,7 +111,8 @@ class Prompt(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Ppdated at'), help_text=_('The date and time when the prompt was last updated.'))
 
     # Feedback field (optional, text field, can be blank or null)
-    feedback = models.TextField(blank=True, null=True, verbose_name=_('Feedback'), help_text=_('Feedbacks to the seller of the prompt.'))
+    # feedback = models.TextField(blank=True, null=True, verbose_name=_('Feedback'), help_text=_('Feedbacks to the seller of the prompt.'))
+    feedback = MDTextField(blank=True, null=True, verbose_name=_('Feedback'), help_text=_('Feedbacks to the seller of the prompt.'))
 
     # Approved field (required, boolean field, default to False, indicates whether the prompt is approved by an admin)
     approved = models.BooleanField(default=False, verbose_name=_('Approved'), help_text=_('Whether the prompt is approved by an admin or not.'))
@@ -130,7 +137,7 @@ class Prompt(models.Model):
     # Define a get_absolute_url() method
     def get_absolute_url(self):
         # Return the URL for the prompt detail view with the prompt id as an argument
-        return reverse('prompt_detail', args=[str(self.id)])
+        return reverse('prompt-detail', args=[str(self.id)])
 
 # # A class for storing the concrete instances of prompt templates or prompt sequences
 # class Instance(models.Model):

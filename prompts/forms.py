@@ -10,7 +10,7 @@ class PromptForm(forms.ModelForm):
     class Meta:
         # Specify the model and the fields to be included in the form
         model = Prompt
-        fields = ['title', 'category', 'cover', 'description', 'style', 'content', 'types', 'price_dollar', 'price_yuan']
+        fields = ['title', 'category', 'cover', 'description', 'style', 'content', 'types', 'output', 'price_dollar', 'price_yuan']
 
         widgets = {
             'description': forms.Textarea(),
