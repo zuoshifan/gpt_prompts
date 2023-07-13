@@ -27,6 +27,9 @@ urlpatterns = [
     # URL pattern for prompts app
     # path('', include('prompts.urls')),
 
+    # URL pattern for star ratings
+    path('ratings/', include('star_ratings.urls', namespace='ratings')),
+
     # # URL pattern for accounts app
     # path('accounts/', include('accounts.urls')),
     # allauth

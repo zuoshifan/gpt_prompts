@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'django_filters',
+    'star_ratings',
     # 'coupons',
     # 'feedback',
     # 'markdownx',
@@ -95,6 +96,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # `allauth` needs this from django
+                'django.template.context_processors.request',
 
                 # Context processor for social authentication
                 # 'social_django.context_processors.backends',

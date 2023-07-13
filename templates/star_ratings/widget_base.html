@@ -1,0 +1,11 @@
+{% extends "star_ratings/widget_base.html" %}
+
+{% load i18n %}
+
+{# Custom the widget, see https://github.com/wildfish/django-star-ratings/blob/develop/star_ratings/templates/star_ratings/widget_base.html #}
+
+{% block rating_detail %}
+{% block rating_average %}
+<div class="star-ratings-rating-average">{% trans 'Average rating: ' %} <span class='star-ratings-rating-value'>{{ rating.average|floatformat:"-2" }}</span></div>
+{% endblock rating_average %}
+{% endblock rating_detail %}

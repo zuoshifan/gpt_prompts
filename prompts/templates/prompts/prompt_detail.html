@@ -2,9 +2,12 @@
 {% load static %}
 {% load bootstrap4 %}
 {% load i18n %}
+{% load ratings %}
 
 {% block css %}
 {{ block.super }}
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
 <link href="/static/mdeditor/css/editormd.preview.css" type="text/css" media="all" rel="stylesheet">
 <script src="/static/mdeditor/js/jquery.min.js"></script>
@@ -23,6 +26,14 @@
                 </div>
                 <h2>{{ prompt.title }}</h2>
                 <p>{{ prompt.seller }} {{ prompt.updated_at }}</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        Rate for the prompt:
+                    </div>
+                    <div class="col-md-8">
+                {% ratings object icon_height=20 icon_width=20 %}
+                    </div>
+                </div>
                 <p><strong>Conversation style: </strong>{{ prompt.get_style_display }}</p>
                 <p><strong>Prompt types: </strong></p>
                 <ul>
