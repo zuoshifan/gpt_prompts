@@ -44,7 +44,7 @@
                 <hr class="my-4">
                 <p class="lead">{{ prompt.description }}</p>
                 <p><strong>Price: </strong><strong>${{ prompt.price_dollar }}</strong> or <strong>￥{{ prompt.price_yuan}}</strong></p>
-                <a href="#" title="Get prompt" class="btn btn-primary btn-lg keychainify-checked">
+                <a href="{% url 'prompt-buy' prompt.id %}" title="Get prompt" class="btn btn-primary btn-lg keychainify-checked">
                     {% trans 'Get prompt' %}
                 </a>
                 <hr class="my-4">

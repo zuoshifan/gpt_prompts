@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+<!-- templates/payment.html -->
+{% block content %}
+<div class="container">
+    <div id="content">
+        <div class="container my-5">
+            <h1>{% trans 'Buy a prompt' %}</h1>
+        </div>
+
+        <div class="container my-5">
+            <form action="{{ form.action }}" method="{{ form.method }}">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="id_title">{{ field.label }}</label>
+                    <div class="col-sm-10">
+                        {% bootstrap_field field show_label=False %}
+                    </div>
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary">
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

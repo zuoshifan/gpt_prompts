@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'fontawesome_5',
     # 'social_django',
     'rosetta',
+    "payments",
     'paypal.standard.ipn',
     'djstripe',
 
@@ -301,6 +302,18 @@ MDEDITOR_CONFIGS = {
         'lineNumbers': False,  # lineNumbers
         'language': 'en'  # zh / en / es
     }
+}
+
+
+# django payments settings
+# Keep in mind that if you use `localhost`, external servers won't be
+# able to reach you for webhook notifications.
+PAYMENT_HOST = 'localhost:8000'
+# A dotted path to the Payment class.
+PAYMENT_MODEL = 'prompts.Payment'
+# Named configuration for your payment provider(s).
+PAYMENT_VARIANTS = {
+    'default': ('payments.dummy.DummyProvider', {})
 }
 
 # # Set the PayPal settings from environment variables

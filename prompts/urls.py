@@ -58,4 +58,10 @@ urlpatterns = [
 
     # URL pattern for prompt feedback update view (path: 'prompts/<int:pk>/feedback/update/')
     # path('prompts/<int:pk>/feedback/update/', views.PromptFeedbackUpdateView.as_view(), name='prompt-feedback-update'),
+
+    # URL pattern for payment detail view (path: 'pay/<int:pk>/')
+    path('buy/<int:prompt_id>/', views.get_prompt, name='prompt-buy'),
+
+    # URL pattern for payment detail view (path: 'pay/<int:pk>/')
+    path('pay/<int:payment_id>/', views.payment_details, name='payment-detail'),
 ]

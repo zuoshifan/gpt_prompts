@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect
+from decimal import Decimal
+from django.shortcuts import render, redirect, get_object_or_404
+from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
+from payments import get_payment_model, RedirectNeeded
 # import mistune
 from .models import Category, Prompt
 from .forms import PromptForm
@@ -84,6 +87,43 @@ class PromptDetailView(DetailView):
     #     context = super(PromptDetailView, self).get_context_data(**kwargs)
     #     context['output_html'] = mistune.markdown(context['object'].output, escape=False) if context['object'] else ''
     #     return context
+
+def get_prompt(request, prompt_id):
+    prompt = Prompt.objects.get(id=prompt_id)
+    Payment = get_payment_model()
+    payment = Payment.objects.create(
+        variant='default',  # this is the variant from PAYMENT_VARIANTS
+        description=f'Buy {prompt.title}',
+        total=Decimal(prompt.price_dollar),
+        tax=Decimal(0),
+        currency='USD',
+        delivery=Decimal(0),
+        billing_first_name='Sherlock',
+        billing_last_name='Holmes',
+        billing_address_1='221B Baker Street',
+        billing_address_2='',
+        billing_city='London',
+        billing_postcode='NW1 6XE',
+        billing_country_code='GB',
+        billing_country_area='Greater London',
+        customer_ip_address='127.0.0.1',
+    )
+
+    return payment_details(request, payment.id)
+
+def payment_details(request, payment_id):
+    payment = get_object_or_404(get_payment_model(), id=payment_id)
+
+    try:
+        form = payment.get_form(data=request.POST or None)
+    except RedirectNeeded as redirect_to:
+        return redirect(str(redirect_to))
+
+    return TemplateResponse(
+        request,
+        'prompts/payment.html',
+        {'form': form, 'payment': payment}
+    )
 
 def search(request):
   query = request.GET.get('q', '')

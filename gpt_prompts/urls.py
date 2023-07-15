@@ -35,6 +35,9 @@ urlpatterns = [
     # allauth
     path('accounts/', include('allauth.urls')),
 
+    # URL pattern for payments
+    path('payments/', include('payments.urls')),
+
     # URL pattern for markdownx app
     # path('markdownx/', include('markdownx.urls')),
 
